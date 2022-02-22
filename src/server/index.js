@@ -7,6 +7,7 @@ const helmet = require("helmet");
 const morgan = require("morgan");
 const { notFoundError, generalError } = require("./middlewares/errors");
 const itemsRouter = require("./routers/itemsRouter");
+const usersRouter = require("./routers/usersRouter");
 
 const app = express();
 
