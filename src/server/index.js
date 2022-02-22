@@ -1,10 +1,12 @@
 require("dotenv").config();
+const cors = require("cors");
 const debug = require("debug")("items:server");
 const chalk = require("chalk");
 const express = require("express");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const { notFoundError, generalError } = require("./middlewares/errors");
+const itemsRouter = require("./routers/itemsRouter");
 
 const app = express();
 
@@ -20,8 +22,13 @@ const startServer = (port) =>
     });
   });
 
+app.use(cors());
 app.use(morgan("dev"));
+app.use(express.json());
 app.use(helmet());
+
+app.use("/users", usersRouter);
+app.use("/items", itemsRouter);
 
 app.use(notFoundError);
 app.use(generalError);
