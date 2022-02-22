@@ -1,4 +1,5 @@
 require("dotenv").config();
+const cors = require("cors");
 const debug = require("debug")("items:server");
 const chalk = require("chalk");
 const express = require("express");
@@ -20,8 +21,13 @@ const startServer = (port) =>
     });
   });
 
+app.use(cors());
 app.use(morgan("dev"));
+app.use(express.json());
 app.use(helmet());
+
+app.use("/login", getTokenRouter);
+app.use("/items", itemsRouter);
 
 app.use(notFoundError);
 app.use(generalError);
