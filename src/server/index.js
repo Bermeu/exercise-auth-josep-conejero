@@ -27,7 +27,7 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(helmet());
 
-/* app.use("/login", getTokenRouter); */
+app.use("/users", usersRouter);
 app.use("/items", itemsRouter);
 
 app.use(notFoundError);
